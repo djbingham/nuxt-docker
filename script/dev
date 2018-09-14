@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Work out project root directory, allowing for this script being run via sym links, etc.
+projectRootDir=$(a="/$0"; a=${a%/*}; a=${a:-.}; a=${a#/}/; cd "${a}/.." || return; pwd)
+
+# Set app directory in host and container
+projectAppDir="${projectRootDir}/app"
+containerAppDir="/srv/app"
+
+# Run Nuxt dev mode within a Node container
+docker run \
+	--rm \
+	-it \
+	-p "80:80" \
+	--env "PORT=80" \
+	--env "HOST=0.0.0.0" \
+	--volume "${projectRootDir}/app:${containerAppDir}" \
+	--workdir ${containerAppDir} \
+	node:10-alpine \
+	npm run dev
+
+exit $?
