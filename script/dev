@@ -16,7 +16,7 @@ docker run \
 	--env "HOST=0.0.0.0" \
 	--volume "${projectRootDir}/app:${containerAppDir}" \
 	--workdir ${containerAppDir} \
-	node:10-alpine \
-	npm run dev
+	node:14-alpine \
+	yarn dev
 
 exit $?
