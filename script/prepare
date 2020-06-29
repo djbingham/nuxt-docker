@@ -13,7 +13,7 @@ docker run \
 	-it \
 	--volume "${projectRootDir}/app:${containerAppDir}" \
 	--workdir ${containerAppDir} \
-	node:10-alpine \
-	npm install
+	node:14-alpine \
+	yarn install
 
 exit $?
